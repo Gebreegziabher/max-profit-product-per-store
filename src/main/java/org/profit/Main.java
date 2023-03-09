@@ -18,9 +18,13 @@ public class Main {
         System.out.println(mapperOutput);
 
         //One reducer
-        List<Pair<String, Pair<Pair<String, String>, Double>>> reducerOutput = Reducer.reduce(Shuffler.shuffle(mapperOutput));
+        System.out.println("\nREDUCER OUTPUT: OPTION 1");
+        System.out.println(Reducer.reduce(Shuffler.shuffle(mapperOutput)));
 
-        System.out.println("\nREDUCER OUTPUT");
+        System.out.println("\nREDUCER OUTPUT: OPTION 2");
+        List<Pair<String, Pair<Pair<String, String>, Double>>> reducerOutput = new ArrayList<>();
+        for(Pair<String, List<Pair<Pair<String, String>, Double>>> reducerInput: Shuffler.shuffle(mapperOutput))
+            reducerOutput.add(Reducer.reduce(reducerInput.getKey(), reducerInput.getValue()));
         System.out.println(reducerOutput);
     }
 }
