@@ -3,8 +3,6 @@ package org.profit;
 import java.util.List;
 
 public class Reducer<K> {
-    public Reducer() {
-    }
 
     public static <K> Pair<K, Pair<Pair<K, K>, Double>> reduce(String storeId, List<Pair<Pair<K, K>, Double>> products) {
         Pair<Pair<K, K>, Double> productWithMaxProfit = null;
