@@ -10,17 +10,15 @@ public class Main {
     public static void main(String[] args) {
 
         //One mapper
-        List<Pair<String, Pair<Pair<String, String>,Double>>> mapperOutput = new ArrayList<>();
-        for(StoreProduct record: Data.getAllList())
+        List<Pair<String, Pair<Pair<String, String>, Double>>> mapperOutput = new ArrayList<>();
+        for (StoreProduct record : Data.getAllList())
             mapperOutput.add(Mapper.map(record));
 
         System.out.println("\nMAPPER OUTPUT");
         System.out.println(mapperOutput);
 
         //One reducer
-        List<Pair<String, Pair<Pair<String, String>, Double>>> reducerOutput = new ArrayList<>();
-        for(Pair<String, List<Pair<Pair<String, String>, Double>>> reducerInput: Shuffler.shuffle(mapperOutput))
-            reducerOutput.add(Reducer.reduce(reducerInput.getKey(), reducerInput.getValue()));
+        List<Pair<String, Pair<Pair<String, String>, Double>>> reducerOutput = Reducer.reduce(Shuffler.shuffle(mapperOutput));
 
         System.out.println("\nREDUCER OUTPUT");
         System.out.println(reducerOutput);
